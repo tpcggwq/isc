@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+body {
+  background: url('https://scontent.fadb6-5.fna.fbcdn.net/v/t1.15752-9/507922283_10078919385527644_6397662688693201835_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=0024fc&_nc_ohc=JbMxdg_VRiwQ7kNvwF1eKYq&_nc_oc=AdldZYFNtFLWdK_zFBD17VJJhdIIhUwC0DuKhipdz-jcwIeZh_TsPSs0D7Lt-vLpV0g&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.fadb6-5.fna&oh=03_Q7cD2gEzJfiL3JMAG7h6rPUmTChw2Z_e1JrLnhbGbONcmUQA3w&oe=687CC8F2') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Inter', sans-serif;
+  text-shadow: 0 0 8px #fff, 0 0 16px #857777, 0 0 24px #070707;
+}
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Luxurious Gradient Custom Scrollbar (Global) */
+::-webkit-scrollbar {
+  width: 10px;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(180deg, #d0368a 0%, #708ad4 99%);
+  box-shadow: inset 2px 2px 5px 0 rgba(255,255,255,0.5);
+  border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-image: linear-gradient(180deg, #e07ea3 0%, #a0b8e6 99%);
+}
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-track-piece,
+::-webkit-scrollbar-corner,
+::-webkit-scrollbar-button {
+  background: linear-gradient(180deg, #1a1023 0%, #1a1023 100%) !important;
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d0368a #0000;
+}
+
+.text-glow {
+  text-shadow: 0 0 8px #d6d4d4, 0 0 16px #6b6666, 0 0 24px #0e0d0d;
+}
+
+.no-glow {
+  text-shadow: none !important;
+}
+
+.global-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  background: rgba(20,20,30,0.6);
+  animation: overlayColorChange 24s ease-in-out infinite alternate;
+  transition: backdrop-filter 0.1s, background 0.1s;
+}
+
+.global-overlay::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.18;
+  background-image: url('https://www.transparenttextures.com/patterns/noise.png');
+  background-size: 200px 200px;
+}
+
+.global-overlay:hover {
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  background: linear-gradient(120deg, rgba(10,10,20,0.92) 0%, rgba(40,10,40,0.92) 100%);
+}
+
+@keyframes overlayColorChange {
+  0%   { background-color: rgba(20,20,30,0.82); }
+  25%  { background-color: rgba(40,20,50,0.82); }
+  50%  { background-color: rgba(30,30,60,0.82); }
+  75%  { background-color: rgba(40,20,50,0.82); }
+  100% { background-color: rgba(20,20,30,0.82); }
+}
+
+.parallax-logo {
+  filter: blur(2.5px);
+  transition: filter 0.4s, opacity 0.4s;
+  position: relative;
+  z-index: 0;
+}
+.parallax-logo::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 60%, rgba(255,255,255,0) 100%);
+  filter: blur(18px);
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: -1;
+  animation: raysGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes raysGlow {
+  0% { opacity: 0.5; filter: blur(14px); }
+  100% { opacity: 0.85; filter: blur(22px); }
+}
+
+.parallax-logo:hover {
+  filter: blur(8px);
+  opacity: 0.32;
+}
+
+.logo-lightbeam {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  height: 90vw;
+  max-width: 900px;
+  max-height: 900px;
+  min-width: 350px;
+  min-height: 350px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.32;
+  filter: blur(8px) brightness(1.2);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.15) 30%, rgba(255,255,255,0.05) 60%, rgba(255,255,255,0) 100%),
+    conic-gradient(from 0deg, rgba(255,255,255,0.18) 0deg 10deg, transparent 10deg 80deg, rgba(255,255,255,0.18) 80deg 90deg, transparent 90deg 170deg, rgba(255,255,255,0.18) 170deg 180deg, transparent 180deg 260deg, rgba(255,255,255,0.18) 260deg 270deg, transparent 270deg 360deg);
+  animation: lightbeamPulse 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes lightbeamPulse {
+  0% { opacity: 0.22; filter: blur(8px) brightness(1.1); }
+  100% { opacity: 0.38; filter: blur(14px) brightness(1.3); }
+}
+
+/* Remove .section specific scrollbar styles */
+.section::-webkit-scrollbar {
+  width: 16px;
+}
+
+.section::-webkit-scrollbar-track,
+.section::-webkit-scrollbar-track-piece,
+.section::-webkit-scrollbar-corner,
+.section::-webkit-scrollbar-button {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.section {
+  scrollbar-color: #d4aa70 #e4e4e4;
+}

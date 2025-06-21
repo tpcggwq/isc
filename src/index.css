@@ -193,5 +193,5 @@ html {
   }
 }
 .animate-slide-in-left {
-  animation: slide-in-left 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation: slide-in-left 1s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }

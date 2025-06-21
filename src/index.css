@@ -179,15 +179,19 @@ html {
 
 /* Custom slide-in-left animation for mobile menu */
 @keyframes slide-in-left {
-  from {
-    transform: translateX(-100%);
-    opacity: 0.5;
+  0% {
+    transform: translateX(-100%) scale(0.98);
+    opacity: 0.2;
   }
-  to {
-    transform: translateX(0);
+  60% {
+    transform: translateX(10%) scale(1.01);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0) scale(1);
     opacity: 1;
   }
 }
 .animate-slide-in-left {
-  animation: slide-in-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slide-in-left 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }

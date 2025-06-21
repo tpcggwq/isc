@@ -1,7 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
 
-const Hero = () => {
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [countdown, setCountdown] = useState('');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     const updateCountdown = () => {
@@ -36,55 +47,96 @@ const Hero = () => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+      setIsMenuOpen(false);
     }
   };
 
+  const navItems = [
+    { id: 'home', label: 'HOME', icon: 'home' },
+    { id: 'about', label: 'ABOUT', icon: 'info' },
+    { id: 'committees', label: 'COMMITTEES', icon: 'groups' },
+    { id: 'registration', label: 'REGISTRATION', icon: 'edit' },
+    { id: 'letters', label: 'LETTERS', icon: 'mail' },
+    { id: 'contact', label: 'CONTACT', icon: 'phone' }
+  ];
+
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center scroll-mt-20">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: 'url(879235_2477386102616215_5732786883977874303_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=0024fc&_nc_ohc=3G1yd1e5TigQ7kNvwE-HgiV&_nc_oc=Adk8PEf7qMV_stMctbGH2I0bhrxw55eCnYR0K4qctekciUVIiZClqU7H9n8wesql23g&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.fadb6-3.fna&oh=03_Q7cD2gEFXtdD3ec8qcE_bFANmqh4TppkFzqT1OPPrW4P6n9cNw&oe=687CB291&fıt=crop)'
-        }}
-      />
-      {/* Main Content */}
-      <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center">
-        {/* Countdown Timer */}
-        <div className="mb-6">
-          <span className="px-4 py-2 rounded-xl bg-black bg-opacity-40 text-yellow-400 font-mono text-2xl md:text-3xl shadow-lg border-2 border-yellow-400 animate-pulse tracking-widest" style={{letterSpacing: '0.15em'}}>
-            {countdown}
-          </span>
+    <header className="transition-all duration-300">
+      <div className="max-w-40xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center py-4">
+          {/* Logo */}
+          <div className="flex items-center mr-0.1">
+            <img 
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqjfbPifjwIYGrTwpZTRuHBX2KBYPQChoBqA&s" 
+              alt="ISCMUN Logo" 
+              className="h-12 w-15 rounded-full object-cover"
+            />
+            <span className="ml-5 text-xl font-bold text-white">𝙄𝙎𝘾𝙈𝙐𝙉'25</span>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex flex-1 justify-end space-x-0 ml-5">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className="text-white hover:text-blue-400 hover:underline font-medium transition-colors duration-200 text-lg tracking-wide flex items-center gap-1 px-4 py-2"
+              >
+                <span className="material-symbols-outlined" style={{ fontSize: 20 }}>
+                  {item.icon}
+                </span>
+                {item.label}
+              </button>
+            ))}
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-2 rounded-lg hover:bg-gray-100 z-50"
+            aria-label="Open menu"
+          >
+            {isMenuOpen ? <X className="h-6 w-6 text-white" /> : <Menu className="h-6 w-6 text-white" />}
+          </button>
         </div>
-        <img 
-          src="https://scontent.fadb6-3.fna.fbcdn.net/v/t1.15752-9/509879235_2477386102616215_5732786883977874303_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=0024fc&_nc_ohc=3G1yd1e5TigQ7kNvwE-HgiV&_nc_oc=Adk8PEf7qMV_stMctbGH2I0bhrxw55eCnYR0K4qctekciUVIiZClqU7H9n8wesql23g&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.fadb6-3.fna&oh=03_Q7cD2gEFXtdD3ec8qcE_bFANmqh4TppkFzqT1OPPrW4P6n9cNw&oe=687CB291&fit=crop" 
-          alt="ISCMUN Logo" 
-          className="mx-auto mb-6 w-32 h-32 rounded-full object-cover border-4 border-white"
-        />
-        <h1 className="text-4xl sm:text-6xl font-bold mb-4">
-          𝙸𝚂𝙲𝙼𝚄𝙉'25
-        </h1>
-        <p className="text-xl sm:text-2xl mb-2">
-          Izmir Sınav College Model United Nations
-        </p>
-        <p className="text-lg sm:text-xl text-gray-200">
-          Model United Nations
-        </p>
-        {/* Conference Details */}
-        <div className="mb-8">
-          <p className="text-2xl font-semibold mb-2">November 1-2-3, 2025</p>
-          <p className="text-lg">İzmir, Turkey</p>
-        </div>
-        {/* Call to Action */}
-        <button
-          onClick={() => scrollToSection('registration')}
-          className="bg-blue-600 hover:bg-blue-700 text-yellow px-8 py-3 rounded-lg font-semibold text-lg transition-colors duration-300"
-        >
-          APPLY NOW
-        </button>
       </div>
-    </section>
+
+      {/* Mobile Navigation Overlay & Menu */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 z-50 flex">
+          {/* Overlay */}
+          <div
+            className="absolute inset-0 bg-black bg-opacity-40"
+            onClick={() => setIsMenuOpen(false)}
+          />
+          {/* Menu */}
+          <div className="relative bg-red-600 bg-opacity-50 w-4/5 max-w-xs h-full shadow-xl flex flex-col py-8 px-6 animate-slide-in-left">
+            <button
+              onClick={() => setIsMenuOpen(false)}
+              className="absolute top-4 right-4 p-2 rounded-lg hover:bg-gray-100"
+              aria-label="Close menu"
+            >
+              <X className="h-6 w-6 text-white" />
+            </button>
+            <nav className="mt-8 space-y-3">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="block w-full text-left px-3 py-2 text-gray-900 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors duration-200 flex items-center gap-1 text-lg font-medium"
+                >
+                  <span className="material-symbols-outlined" style={{ fontSize: 20 }}>
+                    {item.icon}
+                  </span>
+                  {item.label}
+                </button>
+              ))}
+            </nav>
+          </div>
+        </div>
+      )}
+    </header>
   );
 };
 
-export default Hero;
+export default Header;

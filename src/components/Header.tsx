@@ -110,7 +110,7 @@ const Header = () => {
             onClick={() => setIsMenuOpen(false)}
           />
           {/* Menu */}
-          <div className="relative bg-red-600 bg-opacity-50 w-4/5 max-w-xs h-full shadow-xl flex flex-col py-8 px-6 animate-slide-in-left">
+          <div className="relative bg-white bg-opacity-20 w-4/5 max-w-xs h-full shadow-xl flex flex-col py-8 px-6 animate-slide-in-left">
             <button
               onClick={() => setIsMenuOpen(false)}
               className="absolute top-4 right-4 p-2 rounded-lg hover:bg-gray-100"
@@ -123,7 +123,7 @@ const Header = () => {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="block w-full text-left px-3 py-2 text-gray-900 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors duration-200 flex items-center gap-1 text-lg font-medium"
+                  className="block w-full text-left px-3 py-2 text-white hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors duration-200 flex items-center gap-1 text-lg font-medium"
                 >
                   <span className="material-symbols-outlined" style={{ fontSize: 20 }}>
                     {item.icon}

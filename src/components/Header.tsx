@@ -31,9 +31,9 @@ const Header = () => {
   ];
 
   return (
-    <header className="transition-all duration-300" style={{ height: '23px', paddingTop: '30px', paddingBottom: '45px' }}>
-      <div className="max-w-40xl mx-auto px-4 sm:px-6 lg:px-8" style={{ height: '100%' }}>
-      <div className="flex justify-between items-center h-21">
+    <header className="transition-all duration-300">
+      <div className="max-w-40xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <div className="flex items-center mr-0.1">
             <img 
@@ -63,29 +63,45 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100"
+            className="md:hidden p-2 rounded-lg hover:bg-gray-100 z-50"
+            aria-label="Open menu"
           >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isMenuOpen ? <X className="h-6 w-6 text-white" /> : <Menu className="h-6 w-6 text-white" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation Overlay & Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white border-t shadow-lg">
-          <div className="px-4 py-4 space-y-3">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="block w-full text-left px-3 py-2 text-white hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors duration-200 flex items-center gap-1"
-              >
-                <span className="material-symbols-outlined" style={{ fontSize: 20 }}>
-                  {item.icon}
-                </span>
-                {item.label}
-              </button>
-            ))}
+        <div className="fixed inset-0 z-50 flex">
+          {/* Overlay */}
+          <div
+            className="absolute inset-0 bg-black bg-opacity-60"
+            onClick={() => setIsMenuOpen(false)}
+          />
+          {/* Menu */}
+          <div className="relative bg-white w-4/5 max-w-xs h-full shadow-xl flex flex-col py-8 px-6 animate-slide-in-left">
+            <button
+              onClick={() => setIsMenuOpen(false)}
+              className="absolute top-4 right-4 p-2 rounded-lg hover:bg-gray-100"
+              aria-label="Close menu"
+            >
+              <X className="h-6 w-6 text-gray-900" />
+            </button>
+            <nav className="mt-8 space-y-3">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="block w-full text-left px-3 py-2 text-gray-900 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors duration-200 flex items-center gap-1 text-lg font-medium"
+                >
+                  <span className="material-symbols-outlined" style={{ fontSize: 20 }}>
+                    {item.icon}
+                  </span>
+                  {item.label}
+                </button>
+              ))}
+            </nav>
           </div>
         </div>
       )}

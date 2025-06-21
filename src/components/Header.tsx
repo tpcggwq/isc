@@ -86,7 +86,7 @@ const Header = () => {
               className="absolute top-4 right-4 p-2 rounded-lg hover:bg-gray-100"
               aria-label="Close menu"
             >
-              <X className="h-6 w-6 text-gray-900" />
+              <X className="h-6 w-6 text-white" />
             </button>
             <nav className="mt-8 space-y-3">
               {navItems.map((item) => (

@@ -80,7 +80,7 @@ const Header = () => {
             onClick={() => setIsMenuOpen(false)}
           />
           {/* Menu */}
-          <div className="relative bg-white bg-opacity-90 w-4/5 max-w-xs h-full shadow-xl flex flex-col py-8 px-6 animate-slide-in-left">
+          <div className="relative bg-red-600 bg-opacity-50 w-4/5 max-w-xs h-full shadow-xl flex flex-col py-8 px-6 animate-slide-in-left">
             <button
               onClick={() => setIsMenuOpen(false)}
               className="absolute top-4 right-4 p-2 rounded-lg hover:bg-gray-100"

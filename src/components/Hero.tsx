@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useMobile } from '../hooks/useMobile';
 
 const Hero = () => {
   const [countdown, setCountdown] = useState('');
+  const isMobile = useMobile();
 
   useEffect(() => {
     const updateCountdown = () => {
@@ -29,7 +31,10 @@ const Hero = () => {
     };
     updateCountdown();
     const interval = setInterval(updateCountdown, 1000);
-    return () => clearInterval(interval);
+    
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   const scrollToSection = (sectionId: string) => {
@@ -45,9 +50,19 @@ const Hero = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: 'url(879235_2477386102616215_5732786883977874303_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=0024fc&_nc_ohc=3G1yd1e5TigQ7kNvwE-HgiV&_nc_oc=Adk8PEf7qMV_stMctbGH2I0bhrxw55eCnYR0K4qctekciUVIiZClqU7H9n8wesql23g&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.fadb6-3.fna&oh=03_Q7cD2gEFXtdD3ec8qcE_bFANmqh4TppkFzqT1OPPrW4P6n9cNw&oe=687CB291&fıt=crop)'
+          backgroundImage: 'url(879235_2477386102616215_5732786883977874303_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=0024fc&_nc_ohc=3G1yd1e5TigQ7kNvwE-HgiV&_nc_oc=Adk8PEf7qMV_stMctbGH2I0bhrxw55eCnYR0K4qctekciUVIiZClqU7H9n8wesql23g&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.fadb6-3.fna&oh=03_Q7cD2gEFXtdD3ec8qcE_bFANmqh4TppkFzqT1OPPrW4P6n9cNw&oe=687CB291&fıt=crop)',
+          backgroundAttachment: isMobile ? 'scroll' : 'fixed',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
         }}
       />
+      {/* Mobil cihazlar için ek overlay */}
+      {isMobile && (
+        <div 
+          className="absolute inset-0 bg-black bg-opacity-30"
+          style={{ zIndex: 1 }}
+        />
+      )}
       {/* Main Content */}
       <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center">
         {/* Countdown Timer */}
@@ -62,7 +77,7 @@ const Hero = () => {
           className="mx-auto mb-6 w-32 h-32 rounded-full object-cover border-4 border-white"
         />
         <h1 className="text-4xl sm:text-6xl font-bold mb-4">
-          𝙸𝚂𝙲𝙼𝚄𝙉'25
+          𝙸𝚂𝙲𝙼𝚄𝙽'25
         </h1>
         <p className="text-xl sm:text-2xl mb-2">
           Izmir Sınav College Model United Nations

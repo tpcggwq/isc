@@ -7,21 +7,30 @@ import Registration from './components/Registration';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Letters from './components/Letters';
+import { useMobile } from './hooks/useMobile';
 
 const LOGO_URL = 'https://i.imgur.com/WeDyRQ7.png';
 
 function App() {
   // More pronounced parallax state for logo
   const [logoY, setLogoY] = useState(0);
+  const isMobile = useMobile();
+
   useEffect(() => {
     const handleScroll = () => {
       const y = window.scrollY;
-      setLogoY(y * 0.1); // More visible parallax
+      // Mobilde daha az parallax efekti
+      const parallaxFactor = isMobile ? 0.05 : 0.1;
+      setLogoY(y * parallaxFactor);
     };
+    
     window.addEventListener('scroll', handleScroll);
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isMobile]);
 
   return (
     <>
@@ -45,10 +54,10 @@ function App() {
           top: `calc(50% + ${logoY}px)`,
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: '60vw',
-          maxWidth: '700px',
-          minWidth: '320px',
-          opacity: 0.50,
+          width: isMobile ? '80vw' : '60vw',
+          maxWidth: isMobile ? '400px' : '700px',
+          minWidth: isMobile ? '280px' : '320px',
+          opacity: isMobile ? 0.4 : 0.50,
           zIndex: 0,
           pointerEvents: 'none',
           transition: 'filter 0.4s, opacity 0.4s',

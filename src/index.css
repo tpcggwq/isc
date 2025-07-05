@@ -251,10 +251,9 @@ html {
 
 /* Mobil cihazlar için genel performans optimizasyonları */
 @media (max-width: 768px) {
-  /* Mobilde animasyonları hafiflet */
-  * {
-    animation-duration: 0.8s !important;
-    transition-duration: 0.2s !important;
+  /* Mobilde arka plan animasyonunu yavaşlat */
+  .global-overlay {
+    animation: overlayColorChange 60s ease-in-out infinite alternate; /* 24s'den 60s'ye çıkarıldı */
   }
   
   /* Mobilde backdrop-filter'ı devre dışı bırak (performans için) */
@@ -262,5 +261,15 @@ html {
   .global-overlay:hover {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+  }
+  
+  /* Mobilde lightbeam animasyonunu yavaşlat */
+  .logo-lightbeam {
+    animation: lightbeamPulse 8s ease-in-out infinite alternate; /* 3.5s'den 8s'ye çıkarıldı */
+  }
+  
+  /* Mobilde rays glow animasyonunu yavaşlat */
+  .parallax-logo::before {
+    animation: raysGlow 6s ease-in-out infinite alternate; /* 3s'den 6s'ye çıkarıldı */
   }
 }

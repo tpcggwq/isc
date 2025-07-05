@@ -63,6 +63,21 @@ const Contact = () => {
                   <p className="text-lg text-white leading-relaxed mb-1 text-glow">Izmir Sınav College<br />izmir, Mavişehir</p>
                 </div>
               </div>
+              
+              <div className="flex items-start space-x-4">
+                <i className="fi fi-brands-instagram h-6 w-6 text-blue-600 mt-1" style={{ fontSize: '24px' }}></i>
+                <div>
+                  <h4 className="text-lg text-yellow-700 leading-relaxed mb-1 text-glow">Instagram</h4>
+                  <a 
+                    href="https://www.instagram.com/iscmun25" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-lg text-white leading-relaxed mb-1 text-glow hover:text-blue-400 transition-colors duration-200"
+                  >
+                    @iscmun25
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
 

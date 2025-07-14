@@ -18,7 +18,7 @@ const Header = () => {
     const updateCountdown = () => {
       const now = new Date();
       const year = now.getFullYear();
-      const target = new Date(`${year}-11-01T00:00:00`);
+      const target = new Date(`${year}-12-01T00:00:00`);
       if (now > target) {
         target.setFullYear(year + 1);
       }
